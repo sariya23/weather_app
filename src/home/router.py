@@ -4,13 +4,13 @@ from fastapi.responses import HTMLResponse
 
 
 router = APIRouter(
-    prefix="/info",
-    tags=["Info"],
+    prefix="/home",
+    tags=["Home"],
 )
 
 template = Jinja2Templates(directory="templates")
 
 
 @router.get("/", response_class=HTMLResponse)
-def get_info_page(request: Request) -> HTMLResponse:
+def get_home_page(request: Request) -> HTMLResponse:
     return template.TemplateResponse("home.html", {"request": request, "page_name": "info"})

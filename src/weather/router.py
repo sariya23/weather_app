@@ -13,4 +13,4 @@ template = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 def get_weather(request: Request) -> HTMLResponse:
-    return template.TemplateResponse("base.html", {"request": request, "page_name": "weather"})
+    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather"})

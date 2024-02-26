@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from info.router import router as router_info
+from home.router import router as router_info
 from weather.router import router as router_weather
 
 app = FastAPI(title="Weather App")
