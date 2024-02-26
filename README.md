@@ -18,7 +18,8 @@
 - Docker;
 - Pytest;
 - Selenium;
-- CI/CD.
+- CI/CD;
+- MyPy.
 
 ### Как улучшить в будущем:
 - Использовать React для frontend'а;
