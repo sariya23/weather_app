@@ -21,6 +21,6 @@ def weather_page(request: Request) -> HTMLResponse:
 
 
 @router.post("/", response_class=HTMLResponse)
-def get_weather(request: Request, data: str = Form(...)):
+def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     logging.info(data)
     return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": "successfull"})
