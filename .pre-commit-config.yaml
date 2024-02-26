@@ -7,4 +7,4 @@ repos:
   hooks:
     # Run the linter.
     - id: ruff
-      args: [ backend ]
+      args: [ main.py ]
