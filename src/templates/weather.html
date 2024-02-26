@@ -2,12 +2,18 @@
 {% block content %}
 <h1 class="text-center">Weather page</h1>
 <div class="container">
-    <form action>
+    <form method="post">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
-                placeholder="Moscow">
+                placeholder="Moscow", name="data">
             <label for="floatingInput">Enter the city name</label>
+            <input class="btn btn-primary" type="submit" value="Submit">
         </div>
     </form>
+    {% if result %}
+        <p>Result: {{ result }}</p>
+    {% else %}
+        <p>Result is empty</p>
+    {% endif %}
 </div>
 {% endblock %}
