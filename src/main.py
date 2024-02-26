@@ -1,18 +1,11 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+
+from info.router import router as router_info
 
 
-
-app = FastAPI()
+app = FastAPI(title="Weather App")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="templates")
 
-
-@app.get("/", response_class=HTMLResponse)
-def base_router(request: Request) -> HTMLResponse:
-    return templates.TemplateResponse(
-        request=request, name="base.html", context={"request": request}
-    )
+app.include_router(router_info)
