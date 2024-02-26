@@ -1,4 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Weather page</h1>
+<h1 class="text-center">Weather page</h1>
+<div class="container">
+    <form action>
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput"
+                placeholder="Moscow">
+            <label for="floatingInput">Enter the city name</label>
+        </div>
+    </form>
+</div>
 {% endblock %}
