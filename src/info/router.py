@@ -13,4 +13,4 @@ template = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 def get_info_page(request: Request) -> HTMLResponse:
-    return template.TemplateResponse("base.html", {"request": request})
+    return template.TemplateResponse("base.html", {"request": request, "page_name": "info"})
