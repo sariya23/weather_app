@@ -2,7 +2,7 @@
 {% block content %}
 <h1 class="text-center">Weather page</h1>
 <div class="container">
-    <form method="post" name="weather">
+    <form method="post" name="weather" id="weatherForm">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
                 placeholder="Moscow", name="data">
@@ -18,10 +18,15 @@
 </div>
 
 <script>
-    const formData = new FormData(document.forms.weather);
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://127.0.0.1:8000/weather/")
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.send(formData)
+var form = document.getElementById('weatherForm');
+form.onsubmit = async (e) => {
+    e.preventDefault();
+    var params = new FormData(form); 
+
+    fetch('http://127.0.0.1:8000/weather/', {
+        method: 'POST',
+        body: params
+    })
+}; 
 </script>
 {% endblock %}
