@@ -18,15 +18,19 @@
 </div>
 
 <script>
-var form = document.getElementById('weatherForm');
-form.onsubmit = async (e) => {
-    e.preventDefault();
-    var params = new FormData(form); 
-
-    fetch('http://127.0.0.1:8000/weather/', {
-        method: 'POST',
-        body: params
-    })
-}; 
+const form = document.getElementById('weatherForm');
+form.onsubmit = function(event){
+    var xhr = new XMLHttpRequest();
+    var data = new FormData(form);
+    xhr.open('POST','http://127.0.0.1:8000/weather/')
+    xhr.send(data);
+    console.log(data)
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == XMLHttpRequest.DONE) {
+            form.reset();
+        }
+    }
+    return false; 
+}
 </script>
 {% endblock %}
