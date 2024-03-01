@@ -1,30 +1,20 @@
 {% extends "base.html" %}
-{% block content %}
+{% block content %} 
 <h1 class="text-center">Weather page</h1>
 <div class="container">
     <form method="post" name="weather" id="weatherForm">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
-                placeholder="Moscow", name="data">
+                placeholder="Moscow" , name="data">
             <label for="floatingInput">Enter the city name</label>
             <input class="btn btn-primary" type="submit" value="Submit">
         </div>
     </form>
     {% if result %}
-        <p>Result: {{ result }}</p>
+    <p>Result: {{ result }}</p>
     {% else %}
-        <p>Result is empty</p>
+    <p>Result is empty</p>
     {% endif %}
 </div>
 
-<script>
-    function submitForm() {
-        const formData = new FormData(document.getElementById('weatherForm'));
-
-        fetch('http://127.0.0.1:8000/weather/', {
-            method: 'POST',
-            body: formData
-        })
-    }
-</script>
 {% endblock %}
