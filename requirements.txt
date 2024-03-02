@@ -11,3 +11,5 @@ psycopg2-binary
 pre-commit
 ruff
 mypy
+dontenv
+requests
