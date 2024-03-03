@@ -6,6 +6,10 @@ import requests  # type: ignore
 import logging
 from dataclasses import dataclass
 from src.weather.config import API_KEY, BASE_URL
+from src.weather.exceptions import (
+    APIWaetherFailed,
+    APIWeatherBadResponse,
+)
 
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w",
@@ -26,14 +30,7 @@ class Weather:
     description: str = ''
 
 
-@dataclass(frozen=True, slots=True)
-class Response:
-    weather: Weather
-    status_code: int
-    error_message: str
-
-
-def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Response:
+def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
     try:
         response = requests.get(f"{BASE_URL}q={city}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
@@ -43,36 +40,35 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> R
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
         }
-        return Response(
-            weather=Weather(**result),
-            status_code=response.status_code,
-            error_message=response.reason
-        )
+        return Weather(**result)
+
     except requests.exceptions.RequestException:
-        return Response(
-            weather=Weather(),
-            status_code=400,
-            error_message="Rquest error"
-        )
+        raise APIWaetherFailed
+
     except KeyError:
-        return Response(
-            weather=Weather(),
-            status_code=500,
-            error_message="KeyError"
-        )
+        raise APIWeatherBadResponse
         
     
-
-
 @router.get("/", response_class=HTMLResponse)
 def weather_page(request: Request) -> HTMLResponse:
-    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather"})
+    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": "Введите город"})
 
 
 @router.post("/", response_class=HTMLResponse)
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
-    weather = get_weather_by_city(data)
-    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": weather})
+    try:
+        weather = get_weather_by_city(data)
+        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": weather})
+    except APIWeatherBadResponse:
+        message = "Что-то пошло не так, проверьте правильность написания города."
+        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": message})
+    except APIWaetherFailed:
+        message = "Ошибка стороннего сервиса"
+        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": message})
+    except Exception as e:
+        message = "Все сломалось, простите :("
+        logging.error(e)
+        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": message})
 
 
  
