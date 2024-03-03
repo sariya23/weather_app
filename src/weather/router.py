@@ -23,18 +23,19 @@ class Weather:
     location: str
     temperature: str
     wind_speed: str
-    descroption: str
+    description: str
 
 
-def get_weather_by_city(city: str) -> Weather | dict[str, str]:
+def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
     try:
-        response = requests.post(BASE_URL, params={"q": city, "appid": API_KEY, "units": "metric", "lang": "ru"})
+        response = requests.get(f"{BASE_URL}q={city}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
+        logging.info(result_data)
         result = {
             "location": city,
             "temperature": result_data["main"]["temp"],
             "wind_speed": result_data["wind"]["speed"],
-            "description": result_data["main"]["description"],
+            "description": result_data["weather"][0]["description"],
         }
         return Weather(**result)
     except Exception as e:
@@ -49,8 +50,6 @@ def weather_page(request: Request) -> HTMLResponse:
 
 @router.post("/", response_class=HTMLResponse)
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
-    logging.info(data)
-    try:
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": data})
-    except Exception:
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather"}) 
+    weather = get_weather_by_city(data)
+    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": weather})
+ 
