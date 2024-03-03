@@ -16,13 +16,13 @@
         <p>Погода в {{ result.location }}</p>
         <ul>
             <li>
-                Температура: {{ result.temperature }}
+                Температура: {{ result.temperature }}°C
             </li>
             <li>
-                Скорость ветра: {{ result.wind_speed }}
+                Скорость ветра: {{ result.wind_speed }} м/c
             </li>
             <li>
-                Погода: {{ result.description }}
+                Погода: {{ result.description|title }}
             </li>
         </ul>
         {% elif message %}
