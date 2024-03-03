@@ -53,7 +53,7 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
     
 @router.get("/", response_class=HTMLResponse)
 def weather_page(request: Request) -> HTMLResponse:
-    return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": "Введите город"})
+    return template.TemplateResponse("weather.html", {"request": request})
 
 
 @router.post("/", response_class=HTMLResponse)
