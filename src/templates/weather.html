@@ -10,7 +10,13 @@
             <input class="btn btn-primary" type="submit" value="Submit">
         </div>
     </form>
-    <p>Result: {{ result }}</p>
+    {% if result %}
+        <p>Result: {{ result }}</p>
+    {% elif message %}
+        <p>Error {{ message }}</p>
+    {% else %}
+        <p>WTF???</p>
+    {% endif %}
 </div>
 
 {% endblock %}
