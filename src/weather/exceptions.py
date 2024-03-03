@@ -1,0 +1,3 @@
+class APIWaetherFailed(Exception):
+    pass
+
