@@ -13,20 +13,24 @@
     </form>
     <div class="container">
         {% if result %}
-        <div class="div"></div>
-        <p>Погода в {{ result.location }}</p>
-        <img src="{{ url_for('static', path='/images/rain.png')}}" alt="" width="50" height="50">
-        <ul>
-            <li>
-                Температура: {{ result.temperature }}°C
-            </li>
-            <li>
-                Скорость ветра: {{ result.wind_speed }} м/c
-            </li>
-            <li>
-                Погода: {{ result.description|title }}
-            </li>
-        </ul>
+            <div class="weather">
+                <div class="weather__info">
+                    <div class="weather__temperature-image">
+                        <img src="" class="temerature-image__image" alt="">
+                        <p class="temperature-image__temperature weather_value"></p>
+                    </div>
+                    <div class="weather__wind-image">
+                        <img src="" class="wind-image__wind-image"></img>
+                        <p class="wind-image__wind-speed weather_value"></p>
+                    </div>
+                </div>
+                <div class="weather__location">
+                    <div class="weather__location__location-time">
+                        <p class="location-time__location"></p>
+                        <p class="location-time__time"></p>
+                    </div>
+                </div>
+            </div>
         {% elif message %}
         <p>Error {{ message }}</p>
         {% else %}
