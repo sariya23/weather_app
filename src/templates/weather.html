@@ -1,22 +1,24 @@
 {% extends "base.html" %}
 {% block content %} 
-<h1 class="text-center">Weather page</h1>
 <div class="container">
+    <h1 class="text-center">Погода</h1>
     <form method="post" name="weather" id="weatherForm">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
                 placeholder="Moscow" , name="data">
-            <label for="floatingInput">Enter the city name</label>
-            <input class="btn btn-primary" type="submit" value="Submit">
+            <label for="floatingInput">Введите название города</label>
+            <input class="btn btn-primary mt-2" type="submit" value="Узнать погоду">
         </div>
     </form>
-    {% if result %}
+    <div class="container">
+        {% if result %}
         <p>Result: {{ result }}</p>
     {% elif message %}
         <p>Error {{ message }}</p>
     {% else %}
         <p>WTF???</p>
     {% endif %}
+    </div>
 </div>
 
 {% endblock %}
