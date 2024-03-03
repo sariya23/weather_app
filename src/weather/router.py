@@ -4,6 +4,8 @@ from fastapi.responses import HTMLResponse
 import requests  # type: ignore
 
 import logging
+import math
+
 from dataclasses import dataclass
 from src.weather.config import API_KEY, BASE_URL
 from src.weather.exceptions import (
@@ -24,10 +26,10 @@ template = Jinja2Templates(directory="templates")
 
 @dataclass(frozen=True, slots=True)
 class Weather:
-    location: str = ''
-    temperature: str = ''
-    wind_speed: str = ''
-    description: str = ''
+    location: str
+    temperature: int
+    wind_speed: str
+    description: str
 
 
 def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
@@ -36,7 +38,7 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
         result_data = response.json()
         result = {
             "location": city,
-            "temperature": result_data["main"]["temp"],
+            "temperature": math.ceil((result_data["main"]["temp"])),
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
         }
