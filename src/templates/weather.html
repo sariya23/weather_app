@@ -13,7 +13,9 @@
     </form>
     <div class="container">
         {% if result %}
+        <div class="div"></div>
         <p>Погода в {{ result.location }}</p>
+        <img src="{{ url_for('static', path='/images/rain.png')}}" alt="" width="50" height="50">
         <ul>
             <li>
                 Температура: {{ result.temperature }}°C
