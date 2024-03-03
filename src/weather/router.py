@@ -58,17 +58,17 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "result": weather})
+        return template.TemplateResponse("weather.html", {"request": request, "result": weather})
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "message": message})
+        return template.TemplateResponse("weather.html", {"request": request, "message": message})
     except APIWaetherFailed:
         message = "Ошибка стороннего сервиса"
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "message": message})
+        return template.TemplateResponse("weather.html", {"request": request, "message": message})
     except Exception as e:
         message = "Все сломалось, простите :("
         logging.error(e)
-        return template.TemplateResponse("weather.html", {"request": request, "page_name": "weather", "message": message})
+        return template.TemplateResponse("weather.html", {"request": request, "message": message})
 
 
  
