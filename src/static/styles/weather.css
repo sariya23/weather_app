@@ -7,10 +7,32 @@
 
 .weather {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-
+    margin-top: 20px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+    "A B"
+    "C B"
+    ;
+    gap: 10%;
+    justify-items: center;
+    /* border: 1px solid black; */
 }
 
+.weather__temperature-image {
+    grid-area: A;
+    width: 100%;
+}
+
+.weather__wind-image {
+    grid-area: C;
+    width: 100%;
+}
+
+.weather__location {
+    grid-area: B;
+    width: 100%;
+}
 
 .weather_image {
     width: 50px;
