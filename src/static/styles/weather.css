@@ -14,11 +14,11 @@
     "A B"
     "C B"
     ;
-    gap: 10%;
+    gap: 30%;
     justify-items: center;
 }
 
-@media (max-width: 650px) {
+@media (max-width: 771px) {
     .weather {
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
@@ -27,17 +27,24 @@
         "A"
         "C"
         ;
+        gap: 10%;
     }
 }
 
 .weather__temperature-image {
     grid-area: A;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .weather__wind-image {
     grid-area: C;
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .weather__location {
