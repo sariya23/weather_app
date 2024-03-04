@@ -54,3 +54,22 @@
 .weather_value {
     font-size: 30px;
 }
+
+.weather__location__location-time {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.location-time__time {
+    font-size: 15px;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 5px;
+    font-weight: bold;
+}
+
+.location-time__location {
+    display: inline-block;
+    text-align: center;
+}
