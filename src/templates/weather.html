@@ -34,10 +34,10 @@
         {% else %}
         <div class="no_weather">
             <div class="no_weather__gopher_image">
-                <img src="{{ url_for('static', path='/images/gopher_play.png') }}" alt="">
+                <img src="{{ url_for('static', path='/images/gopher_play.png') }}" class="gopher_image__image">
             </div>
             <div class="no_weather__text">
-                <p>Ждем, когда вы введете погоду</p>
+                <span>Ждем, когда вы введете погоду</span>
             </div>
         </div>
         {% endif %}
