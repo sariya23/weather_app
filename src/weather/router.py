@@ -60,7 +60,7 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        return template.TemplateResponse("weather.html", {"request": request, "result": weather})
+        return template.TemplateResponse("weather.html", {"request": request, "weather": weather})
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
