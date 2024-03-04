@@ -16,7 +16,18 @@
     ;
     gap: 10%;
     justify-items: center;
-    /* border: 1px solid black; */
+}
+
+@media (max-width: 650px) {
+    .weather {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas: 
+        "B"
+        "A"
+        "C"
+        ;
+    }
 }
 
 .weather__temperature-image {
