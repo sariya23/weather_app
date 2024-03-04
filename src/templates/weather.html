@@ -32,9 +32,9 @@
         {% elif message %}
         <p>Error {{ message }}</p>
         {% else %}
-        <p>
-            Здесь отобразится погода в городе, который вы введете в поле
-        </p>
+        <div class="no_weather">
+            <img src="{{ url_for('static', path='/images/gopher_play.png') }}" width="100">
+        </div>
         {% endif %}
     </div>
 </div>
