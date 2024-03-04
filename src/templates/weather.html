@@ -30,7 +30,14 @@
                 </div>
             </div>
         {% elif message %}
-        <p>Error {{ message }}</p>
+        <div class="no_weather">
+            <div class="no_weather__gopher_image">
+                <img src="{{ url_for('static', path='/images/gopher_fix.png') }}" class="gopher_image__image">
+            </div>
+            <div class="no_weather__text">
+                <span>У нас поломка</span>
+            </div>
+        </div> 
         {% else %}
         <div class="no_weather">
             <div class="no_weather__gopher_image">
