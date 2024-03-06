@@ -5,13 +5,15 @@ import requests  # type: ignore
 
 import logging
 import math
-
+from datetime import datetime
 from dataclasses import dataclass
+
 from src.weather.config import API_KEY, BASE_URL
 from src.weather.exceptions import (
     APIWaetherFailed,
     APIWeatherBadResponse,
 )
+from src.weather.utils import get_datetime_by_utc_shift
 
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w",
@@ -23,6 +25,7 @@ router = APIRouter(
 )
 
 template = Jinja2Templates(directory="templates")
+
 
 @dataclass(frozen=True, slots=True)
 class Weather:
@@ -63,8 +66,19 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        #TODO: сделать парсинг даты и времени
-        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": ""})
+        now_datetime_utc = datetime.utcnow()
+        date, time = get_datetime_by_utc_shift(now_datetime_utc, weather.UTC_shift)
+        formatted_date = date.strftime("%d.%m.%Y")
+        formatted_time = time.strftime("%H:%M")
+        return template.TemplateResponse(
+            "weather.html",
+            {
+                "request": request,
+                "weather": weather,
+                "date": formatted_date,
+                "time": formatted_time,
+            }
+        )
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
