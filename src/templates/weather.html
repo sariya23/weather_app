@@ -15,11 +15,11 @@
         {% if weather %}
             <div class="weather">
                 <div class="weather__temperature-image">
-                    <img src="{{ url_for('static', path='/images/rain.png')}}" class="temerature-image__image weather_image" alt="">
+                    <img src="{{ url_for('static', path='/images/asd.png')}}" class="temerature-image__image weather_image" alt="">
                     <span class="temperature-image__temperature weather_value">{{ weather.temperature }} °C</span>
                 </div>
                 <div class="weather__wind-image">
-                    <img src="{{ url_for('static', path='/images/rain.png')}}" class="wind-image__wind-image weather_image"></img>
+                    <img src="{{ url_for('static', path='/images/asd.png')}}" class="wind-image__wind-image weather_image"></img>
                     <span class="wind-image__wind-speed weather_value"> {{ weather.wind_speed }} m/s</span>
                 </div>
                 <div class="weather__location">
@@ -30,7 +30,6 @@
                         <p class="location-time__time location_label">
                            По местному времени: <span class="location_value">{{ date }} {{ time }}</span>
                         </p>
-                        <p class="location-time__time"></p>
                     </div>
                 </div>
             </div>
