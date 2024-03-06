@@ -3,12 +3,12 @@
 repos:
 - repo: https://github.com/astral-sh/ruff-pre-commit
   # Ruff version.
-  rev: v0.0.290
+  rev: v0.3.0
   hooks:
     # Run the linter.
     - id: ruff
       args: [ src/main.py ]
 - repo: https://github.com/pre-commit/mirrors-mypy
-  rev: ''
+  rev: 'v1.8.0'
   hooks:
     - id: mypy
