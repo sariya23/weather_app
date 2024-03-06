@@ -31,8 +31,7 @@ class Weather:
     temperature: int
     wind_speed: str
     description: str
-    UTC_shift: str
-    time_in_location: str
+    UTC_time: str
 
 def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
     try:
@@ -43,8 +42,7 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
             "temperature": math.ceil((result_data["main"]["temp"])),
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
-            "UTC_shift": result_data["timezone"],
-            "time_in_location": datetime.now()
+            "UTC_time": datetime.utcnow()
         }
         return Weather(**result)
 
@@ -66,7 +64,7 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": datetime.now()})
+        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": weather.UTC_time})
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
