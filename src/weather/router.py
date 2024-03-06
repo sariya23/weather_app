@@ -5,7 +5,6 @@ import requests  # type: ignore
 
 import logging
 import math
-from datetime import datetime, timedelta
 
 from dataclasses import dataclass
 from src.weather.config import API_KEY, BASE_URL
@@ -31,7 +30,6 @@ class Weather:
     temperature: int
     wind_speed: str
     description: str
-    UTC_time: datetime
     UTC_shift: int
 
 def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
@@ -43,7 +41,6 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
             "temperature": math.ceil((result_data["main"]["temp"])),
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
-            "UTC_time": datetime.utcnow(),
             "UTC_shift": result_data["timezone"]
         }
         return Weather(**result)
@@ -66,8 +63,8 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        local_time = weather.UTC_time + timedelta(hours=weather.UTC_shift / 3600)
-        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": local_time})
+        #TODO: сделать парсинг даты и времени
+        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": ""})
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
