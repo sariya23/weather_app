@@ -35,7 +35,7 @@ class Weather:
     description: str
     UTC_shift: int
 
-def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
+def get_weather_by_city(city: str, lang: str = "en", units: str = "metric") -> Weather:
     try:
         response = requests.get(f"{BASE_URL}q={city}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
