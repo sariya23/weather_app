@@ -5,6 +5,7 @@ import requests  # type: ignore
 
 import logging
 import math
+from datetime import datetime
 
 from dataclasses import dataclass
 from src.weather.config import API_KEY, BASE_URL
@@ -30,7 +31,8 @@ class Weather:
     temperature: int
     wind_speed: str
     description: str
-
+    UTC_shift: str
+    time_in_location: str
 
 def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> Weather:
     try:
@@ -41,6 +43,8 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
             "temperature": math.ceil((result_data["main"]["temp"])),
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
+            "UTC_shift": result_data["timezone"],
+            "time_in_location": datetime.now()
         }
         return Weather(**result)
 
@@ -49,6 +53,8 @@ def get_weather_by_city(city: str, lang: str = "ru", units: str = "metric") -> W
 
     except KeyError:
         raise APIWeatherBadResponse
+    except Exception as e:
+        raise e
         
     
 @router.get("/", response_class=HTMLResponse)
@@ -60,7 +66,7 @@ def weather_page(request: Request) -> HTMLResponse:
 def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather = get_weather_by_city(data)
-        return template.TemplateResponse("weather.html", {"request": request, "weather": weather})
+        return template.TemplateResponse("weather.html", {"request": request, "weather": weather, "time": datetime.now()})
     except APIWeatherBadResponse:
         message = "Что-то пошло не так, проверьте правильность написания города."
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
