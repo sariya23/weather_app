@@ -74,7 +74,7 @@
     font-size: 15px;
     display: inline-block;
     text-align: center;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
     font-weight: bold;
 }
 
@@ -83,7 +83,15 @@
     text-align: center;
 }
 
-.weather_value__city {
+.location_value {
     color:rgb(57, 121, 217);
-    font-size: 40px;
+    font-size: 30px;
+}
+
+.location_label {
+    font-size: 20px;
+    display: inline-block;
+    text-align: center;
+    letter-spacing: 1px;
+    font-weight: bold;
 }
