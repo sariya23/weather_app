@@ -55,28 +55,8 @@
     </div>
 </div>
 <script>
-    function checkInput() {
-        const sendCity = document.getElementById("sendCity");
-        const cityInput = document.getElementById("floatingInput");
-        if (valueInput.length === 0) {
-            sendCity.disabled = true;
-        } else {
-            sendCity.disabled = false;
-        }
-    
-    }
     const sendCity = document.getElementById("sendCity");
     const cityInput = document.getElementById("floatingInput");
-    
-    sendCity.addEventListener("click", () => {
-        const valueInput = cityInput.value;
-
-        if (valueInput.length === 0) {
-            sendCity.disabled = true;
-        } else {
-            sendCity.disabled = false;
-        }
-    })
 
     cityInput.oninput = function () {
         sendCity.disabled = false;
