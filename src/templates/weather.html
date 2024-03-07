@@ -54,17 +54,7 @@
         {% endif %}
     </div>
 </div>
-<script>
-    const sendCity = document.getElementById("sendCity");
-    const cityInput = document.getElementById("floatingInput");
-
-    cityInput.oninput = function () {
-        if (cityInput.value.length === 0) {
-            sendCity.disabled = true;
-        } else {
-            sendCity.disabled = false;
-        }
-
-    }
+<script src="{{ url_for('static', path='/script/disableButtonWithEmptyInput.js') }}">
+    disableButtonWithEmtyInput()
 </script>
 {% endblock %}
