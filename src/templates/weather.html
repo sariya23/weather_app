@@ -36,7 +36,7 @@
         {% elif message %}
         <div class="no_weather">
             <div class="no_weather__gopher_image">
-                <img src="{{ url_for('static', path='/images/gopher_fix.png') }}" class="gopher_image__image">
+                <img src="{{ url_for('static', path='/images/gopher_info/gopher_fix.png') }}" class="gopher_image__image">
             </div>
             <div class="no_weather__text">
                 <span> {{ message }}</span>
@@ -45,7 +45,7 @@
         {% else %}
         <div class="no_weather">
             <div class="no_weather__gopher_image">
-                <img src="{{ url_for('static', path='/images/gopher_play.png') }}" class="gopher_image__image">
+                <img src="{{ url_for('static', path='/images/gopher_info/gopher_play.png') }}" class="gopher_image__image">
             </div>
             <div class="no_weather__text">
                 <span>Ждем, когда вы введете погоду</span>
