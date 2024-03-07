@@ -15,7 +15,7 @@
         {% if weather %}
             <div class="weather">
                 <div class="weather__temperature-image">
-                    <img src="{{ url_for('static', path='/images/asd.png')}}" class="temerature-image__image weather_image" alt="">
+                    <img src="{{ url_for('static', path='/images/weather_icons/' ~ icon) }}" class="temerature-image__image weather_image" alt="">
                     <span class="temperature-image__temperature weather_value">{{ weather.temperature }} °C</span>
                 </div>
                 <div class="weather__wind-image">
