@@ -22,7 +22,6 @@ def get_weater_icon_by_description(descrption: str, time_: time) -> str:
 
     Если время ночное, то возвращается темная иконка.
     """
-
     try:
         if is_hight(time_):
             return WEATHER_ICON_HIGHT[descrption]
