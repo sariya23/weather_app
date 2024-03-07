@@ -12,8 +12,9 @@ from src.weather.config import API_KEY, BASE_URL
 from src.weather.exceptions import (
     APIWaetherFailed,
     APIWeatherBadResponse,
+    WrongWeatherDescriprion,
 )
-from src.weather.utils import get_datetime_by_utc_shift
+from src.weather.utils import get_datetime_by_utc_shift, get_weater_icon_by_description
 
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w",
@@ -68,6 +69,7 @@ def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
         weather = get_weather_by_city(data)
         now_datetime_utc = datetime.utcnow()
         date, time = get_datetime_by_utc_shift(now_datetime_utc, weather.UTC_shift)
+        weather_icon_path = get_weater_icon_by_description(weather.description, time)
         formatted_date = date.strftime("%d.%m.%Y")
         formatted_time = time.strftime("%H:%M")
         return template.TemplateResponse(
@@ -77,6 +79,7 @@ def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
                 "weather": weather,
                 "date": formatted_date,
                 "time": formatted_time,
+                "icon": weather_icon_path,
             }
         )
     except APIWeatherBadResponse:
@@ -84,6 +87,9 @@ def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
     except APIWaetherFailed:
         message = "Ошибка стороннего сервиса"
+        return template.TemplateResponse("weather.html", {"request": request, "message": message})
+    except WrongWeatherDescriprion:
+        message = "Мы не учли все варианты погоды :("
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
     except Exception as e:
         message = "Все сломалось, простите :("
