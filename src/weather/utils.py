@@ -2,7 +2,7 @@ from datetime import timedelta, datetime, date, time
 from typing import TypeAlias
 
 from src.weather.exceptions import WrongWeatherDescriprion
-
+from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 
 SecondsShift: TypeAlias = int
 
@@ -22,33 +22,11 @@ def get_weater_icon_by_description(descrption: str, time_: time) -> str:
 
     Если время ночное, то возвращается темная иконка.
     """
-    weather_icon_map_day = {
-        "clear_sky": "01d.png",
-        "few_clouds": "02d.png",
-        "scattered clouds": "03d.png",
-        "broken clouds": "04d.png",
-        "shower rain": "09d.png",
-        "rain": "10d.png",
-        "thunderstorm": "11d.png",
-        "snow": "13d.png",
-        "mist": "50d.ong"
-    }
 
-    weather_icon_map_night = {
-        "clear_sky": "01n.png",
-        "few_clouds": "02n.png",
-        "scattered clouds": "03n.png",
-        "broken clouds": "04n.png",
-        "shower rain": "09n.png",
-        "rain": "10n.png",
-        "thunderstorm": "11n.png",
-        "snow": "13n.png",
-        "mist": "50n.ong"
-    }
     try:
         if is_hight(time_):
-            return weather_icon_map_night[descrption]
-        return weather_icon_map_day[descrption]
+            return WEATHER_ICON_HIGHT[descrption]
+        return WEATHER_ICON_DAY[descrption]
     except KeyError:
         raise WrongWeatherDescriprion(f"Такой погоды нет - {descrption}")
     
