@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 
 
 router = APIRouter(
-    prefix="/home",
+    prefix="",
     tags=["Home"],
 )
 
