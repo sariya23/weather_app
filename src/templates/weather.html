@@ -25,7 +25,7 @@
                 <div class="weather__location">
                     <div class="weather__location__location-time">
                         <p class="location-time__location location_label">
-                            Погода в <span class="location_value">{{ weather.location }}</span>
+                            Погода в <span class="location_value">{{ weather.location|capitalize  }}</span>
                         </p>
                         <p class="location-time__time location_label">
                            По местному времени: <span class="location_value">{{ date }} {{ time }}</span>
