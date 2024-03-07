@@ -8,7 +8,7 @@
                 placeholder="Moscow" , name="data">
             <label for="floatingInput">Введите название города</label>
             <input class="btn btn-primary mt-4" type="submit"
-                value="Узнать погоду">
+                value="Узнать погоду" id="sendCity">
         </div>
     </form>
     <div class="container">
@@ -54,5 +54,19 @@
         {% endif %}
     </div>
 </div>
+<script>
+    const sendCity = document.getElementById("sendCity");
+    const cityInput = document.getElementById("floatingInput");
+    
+    sendCity.addEventListener("click", () => {
+        const valueInput = cityInput.value;
 
+        if (valueInput.length === 0) {
+            sendCity.disabled = true;
+        } else {
+            sendCity.disabled = false;
+        }
+    })
+    
+</script>
 {% endblock %}
