@@ -88,7 +88,8 @@ def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     except APIWaetherFailed:
         message = "Ошибка стороннего сервиса"
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
-    except WrongWeatherDescriprion:
+    except WrongWeatherDescriprion as e:
+        logging.error(e)
         message = "Мы не учли все варианты погоды :("
         return template.TemplateResponse("weather.html", {"request": request, "message": message})
     except Exception as e:
