@@ -59,7 +59,12 @@
     const cityInput = document.getElementById("floatingInput");
 
     cityInput.oninput = function () {
-        sendCity.disabled = false;
+        if (cityInput.value.length === 0) {
+            sendCity.disabled = true;
+        } else {
+            sendCity.disabled = false;
+        }
+
     }
 </script>
 {% endblock %}
