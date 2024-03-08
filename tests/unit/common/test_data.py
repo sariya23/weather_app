@@ -65,3 +65,14 @@ DAY_TIME_BOUNDARU = [
 
 NIGHT_TIME = [time(hour=h) for h in (0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23)] + NIGHT_TIME_BOUNDARY
 DAY_TIME = [time(hour=h) for h in range(8, 19)] + DAY_TIME_BOUNDARU
+
+WROND_WEATHER_DESCRIPTION = (
+    "",
+    "aboba",
+    "clearsky",
+    "clear_sky",
+    "dast",
+    "smk",
+    "oifh928h8f9289",
+    "*!&#*&wjkedjwen",
+)
