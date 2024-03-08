@@ -23,6 +23,8 @@ def test_is_night(time_: time) -> None:
     assert result_is_night is True
 
 
+@pytest.mark.fast
+@pytest.mark.unit
 @pytest.mark.parametrize("time_", DAY_TIME)
 def test_is_day(time_: time) -> None:
     """
@@ -33,6 +35,8 @@ def test_is_day(time_: time) -> None:
     assert result_is_night is False
 
 
+@pytest.mark.fast
+@pytest.mark.unit
 @pytest.mark.parametrize("time_", DAY_TIME)
 @pytest.mark.parametrize("weather_description", WEATHER_DESCRIPTION)
 def test_get_weater_icon_by_description_day_positive(weather_description: str, time_: time) -> None:
@@ -46,6 +50,8 @@ def test_get_weater_icon_by_description_day_positive(weather_description: str, t
     assert weather_icon == WEATHER_ICON_DAY[weather_description]
 
 
+@pytest.mark.fast
+@pytest.mark.unit
 @pytest.mark.parametrize("time_", NIGHT_TIME)
 @pytest.mark.parametrize("weather_description", WEATHER_DESCRIPTION)
 def test_get_weater_icon_by_description_night_positive(weather_description: str, time_: time) -> None:
@@ -59,6 +65,8 @@ def test_get_weater_icon_by_description_night_positive(weather_description: str,
     assert weather_icon == WEATHER_ICON_HIGHT[weather_description]
 
 
+@pytest.mark.fast
+@pytest.mark.unit
 @pytest.mark.parametrize("wrong_weather_description", WROND_WEATHER_DESCRIPTION)
 def test_get_weater_icon_by_description_negative(wrong_weather_description: str) -> None:
     """
