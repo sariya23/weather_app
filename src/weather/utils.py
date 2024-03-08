@@ -32,7 +32,7 @@ def get_weater_icon_by_description(descrption: str, time_: time) -> str:
 
 def is_hight(time_: time) -> bool:
     hours = time_.hour
-    return 0 < hours < 7 and 20 < hours < 23
+    return 0 <= hours <= 7 or 19 <= hours <= 23
 
 
 if __name__ == "__main__":
