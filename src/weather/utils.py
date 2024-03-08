@@ -7,7 +7,7 @@ from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 SecondsShift: TypeAlias = int
 
 
-def get_datetime_by_utc_shift(date_time: datetime, shift: SecondsShift) -> tuple[date, time]:
+def add_seconds_shift_to_datetime(date_time: datetime, shift: SecondsShift) -> tuple[date, time]:
     """
     Добавляет к переданному времени сдвиг относительно UTC.
     """

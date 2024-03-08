@@ -10,7 +10,7 @@ from src.weather.exceptions import (
     APIWeatherBadResponse,
     WrongWeatherDescriprion,
 )
-from src.weather.utils import get_datetime_by_utc_shift, get_weater_icon_by_description
+from src.weather.utils import add_seconds_shift_to_datetime, get_weater_icon_by_description
 from src.weather.service import get_weather_by_city
 from src.weather.service import Weather
 
@@ -36,7 +36,7 @@ def get_weather(request: Request, data: str = Form(...)) -> HTMLResponse:
     try:
         weather: Weather = get_weather_by_city(data)
         now_datetime_utc = datetime.utcnow()
-        date, time = get_datetime_by_utc_shift(now_datetime_utc, weather.UTC_shift)
+        date, time = add_seconds_shift_to_datetime(now_datetime_utc, weather.UTC_shift)
         weather_icon_path = get_weater_icon_by_description(weather.description, time)
         formatted_date = date.strftime("%d.%m.%Y")
         formatted_time = time.strftime("%H:%M")
