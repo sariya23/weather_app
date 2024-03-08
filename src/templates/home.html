@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="content">
-    <div class="sky">
-        <div class="cloud_block">
-            <canvas width="500" height="300" class="cloud"></canvas>
-        </div>
+<main class="content">
+    <div class="about">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas a ipsam necessitatibus, magni debitis blanditiis impedit, ullam quisquam ut tempora illo totam exercitationem vel, pariatur voluptas nam! Quis, quod deserunt!</p>
+        <img src="{{ url_for('static', path='images/about_image.png') }}" alt="">
     </div>
-</div>
+    <div class="usability">
+
+    </div>
+</main>
 {% endblock %}
