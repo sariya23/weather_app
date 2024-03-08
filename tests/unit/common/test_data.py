@@ -56,3 +56,4 @@ WEATHER_DESCRIPTION = (
 )
 
 NIGHT_TIME = [time(hour=h) for h in (0, 1, 2, 3, 4, 5, 6, 7, 19, 20, 21, 22, 23)]
+DAY_TIME = [time(hour=h) for h in range(8, 19)]
