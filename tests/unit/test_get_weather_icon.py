@@ -12,7 +12,8 @@ from tests.unit.common.test_data import (
 from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 from src.weather.exceptions import WrongWeatherDescriprion
 
-
+@pytest.mark.fast
+@pytest.mark.unit
 @pytest.mark.parametrize("time_", NIGHT_TIME)
 def test_is_night(time_: time) -> None:
     """
