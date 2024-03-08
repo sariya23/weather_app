@@ -4,7 +4,7 @@ from datetime import time
 
 from src.weather.utils import is_hight, get_weater_icon_by_description
 from tests.unit.common.test_data import NIGHT_TIME, DAY_TIME, WEATHER_DESCRIPTION
-from src.weather.constants import WEATHER_ICON_DAY
+from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 
 
 @pytest.mark.parametrize("time_", NIGHT_TIME)
@@ -37,3 +37,17 @@ def test_get_weater_icon_by_description_day_positive(weather_description: str, t
     """
     weather_icon = get_weater_icon_by_description(weather_description, time_)
     assert weather_icon == WEATHER_ICON_DAY[weather_description]
+
+
+@pytest.mark.parametrize("time_", NIGHT_TIME)
+@pytest.mark.parametrize("weather_description", WEATHER_DESCRIPTION)
+def test_get_weater_icon_by_description_night_positive(weather_description: str, time_: time) -> None:
+    """
+    Проверяем, что при передаче функции верного описания погоды нам
+    возвращается нужное изображение этой погоды. 
+
+    Здесь проверяется при дневном времени.
+    """
+    weather_icon = get_weater_icon_by_description(weather_description, time_)
+    assert weather_icon == WEATHER_ICON_HIGHT[weather_description]
+    
