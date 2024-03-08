@@ -2,7 +2,7 @@ import pytest
 
 from datetime import time
 
-from tests.unit.common.test_date_is_hight import (
+from tests.unit.common.test_data_is_hight import (
     NIGHT_TIME,
     DAY_TIME,
 )
