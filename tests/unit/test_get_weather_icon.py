@@ -3,7 +3,7 @@ import pytest
 from datetime import time
 
 from src.weather.utils import get_weater_icon_by_description
-from tests.unit.common.test_data_get_weather_icon import (
+from tests.unit.common.get_weather_icon_test_data import (
     NIGHT_TIME,
     DAY_TIME,
     WEATHER_DESCRIPTION,
