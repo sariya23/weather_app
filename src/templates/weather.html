@@ -12,7 +12,14 @@
         </div>
     </form>
     <div class="container">
-        {% if weather %}
+
+        {% if cities %}
+        {% for city in cities %}
+        <form method="post" name="city_name">
+            <button type="button" class="btn btn-primary">{{ city.city }} {{ city.country }}</button>
+        </form>
+        {% endfor %}
+        {% elif weather %}
             <div class="weather">
                 <div class="weather__temperature-image">
                     <img src="{{ url_for('static', path='/images/weather_icons/' ~ icon) }}" class="temerature-image__image weather_image" alt="">
