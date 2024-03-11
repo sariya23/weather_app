@@ -64,7 +64,3 @@ def get_weather_by_city(city: str, lang: str = "en", units: str = "metric") -> W
         raise APIWeatherBadResponse
     except Exception as e:
         raise e
-
-
-
-print(coords_of_city("Вашингтон"))
