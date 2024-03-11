@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h1 class="text-center">Погода</h1>
-    <form method="post" name="weather" id="weatherForm">
+    <form method="post" name="city" id="cityForm">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
                 placeholder="Moscow" , name="data">
@@ -15,8 +15,9 @@
 
         {% if cities %}
         {% for city in cities %}
-        <form method="post" name="city_name">
-            <button type="button" class="btn btn-primary">{{ city.city }} {{ city.country }}</button>
+        <form method="post" name="city_name" action="/weather/get?city={{ city.city }}">
+            <input class="btn btn-primary mt-4" type="submit"
+            value="{{city.city}} {{city.country}}" id="city">
         </form>
         {% endfor %}
         {% elif weather %}
