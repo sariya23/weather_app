@@ -4,11 +4,6 @@ from fastapi.responses import HTMLResponse
 import logging
 from datetime import datetime
 
-from src.weather.exceptions import (
-    APIWaetherFailed,
-    APIWeatherBadResponse,
-    WrongWeatherDescriprion,
-)
 from src.weather.utils import add_seconds_shift_to_datetime, get_weater_icon_by_description
 from src.weather.service import get_weather_by_city, coords_of_city, Weather
 
@@ -36,7 +31,9 @@ def weather_city(request: Request, data: str = Form(...)) -> HTMLResponse:
 
 
 @router.post("/weather_by_city/")
-def get_weather(request: Request, city: str = Form(...)) -> HTMLResponse:
-    return template.TemplateResponse("weather_result.html", {"request": request, "city": city})
+def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
+    lon, lat = coords.split()
+    weather = get_weather_by_city(lon=lon, lat=lat)
+    return template.TemplateResponse("weather_result.html", {"request": request, "weather": weather})
 
 

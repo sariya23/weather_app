@@ -9,7 +9,8 @@ from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse
 
 @dataclass(frozen=True, slots=True)
 class Weather:
-    location: str
+    city: str
+    country: str
     temperature: int
     wind_speed: str
     description: str
@@ -43,13 +44,14 @@ def coords_of_city(city: str) -> list[CityLocation]:
     return cities
 
 
-def get_weather_by_city(city: str, lang: str = "en", units: str = "metric") -> Weather:
+def get_weather_by_city(lon: str, lat: str, lang: str = "en", units: str = "metric") -> Weather:
     try:
-        response = requests.get(f"{BASE_URL}q={city}&appid={API_KEY}&lang={lang}&units={units}")
+        response = requests.get(f"{BASE_URL}lon={lon}&lat={lat}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
         print(result_data)
         result = {
-            "location": city,
+            "city": result_data["name"],
+            "country": result_data["sys"]["country"],
             "temperature": math.ceil((result_data["main"]["temp"])),
             "wind_speed": result_data["wind"]["speed"],
             "description": result_data["weather"][0]["description"],
