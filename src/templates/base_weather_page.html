@@ -2,7 +2,7 @@
 {% block content %}
 <div class="container">
     <h1 class="text-center">Погода</h1>
-    <form method="post" name="city" id="cityForm">
+    <form method="post" name="city" id="cityForm" action="/weather/city">
         <div class="form-floating">
             <input type="text" class="form-control" id="floatingInput"
                 placeholder="Moscow" , name="data">
@@ -11,14 +11,6 @@
                 value="Узнать погоду" id="sendCity" disabled>
         </div>
     </form>
-    <div class="no_weather">
-        <div class="no_weather__gopher_image">
-            <img src="{{ url_for('static', path='/images/gopher_info/gopher_play.png') }}" class="gopher_image__image">
-        </div>
-        <div class="no_weather__text">
-            <span>Ждем, когда вы введете погоду</span>
-        </div>
-    </div>
     {% block result %}
     {% endblock %}
 <script src="{{ url_for('static', path='/script/disableButtonWithEmptyInput.js') }}">

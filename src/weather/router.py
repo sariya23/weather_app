@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Request, Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
+from fastapi.responses import RedirectResponse
 
 import logging
 from datetime import datetime
@@ -27,5 +28,10 @@ template = Jinja2Templates(directory="templates")
     
 @router.get("/", response_class=HTMLResponse)
 def weather_page(request: Request) -> HTMLResponse:
-    return template.TemplateResponse("base_weather_page.html", {"request": request})
+    return template.TemplateResponse("no_weather.html", {"request": request})
+
+
+@router.post("/city", response_class=HTMLResponse)
+def weather_city(request: Request, data: str = Form(...)) -> HTMLResponse:
+    return template.TemplateResponse("weather_result.html", {"request": request, "city": data})
 
