@@ -1,0 +1,10 @@
+{% extends "base_weather_page.html" %}
+{% block result %}
+<form action="/weather/weather_by_city/" method="POST">
+    {% for city in cities %}
+        <input class="btn btn-primary mt-4" type="submit"
+        value="{{ city.city }}" id="sendCity" name="city">
+    {% endfor %}
+</form>
+
+{% endblock %}
