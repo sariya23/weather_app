@@ -32,14 +32,24 @@ def coords_of_city(city: str) -> set[CityLocation]:
     cities: list[CityLocation] = []
 
     for city_data in result_data:
-        cities.append(
-            CityLocation(
-                lat=city_data["lat"],
-                lon=city_data["lon"],
-                city=city_data["name"],
-                country=city_data["country"],
+        if "ru" in city_data["local_names"]:
+            cities.append(
+                CityLocation(
+                    lat=city_data["lat"],
+                    lon=city_data["lon"],
+                    city=city_data["local_names"]["ru"],
+                    country=city_data["country"],
+                )
             )
-        )
+        else:
+            cities.append(
+                CityLocation(
+                    lat=city_data["lat"],
+                    lon=city_data["lon"],
+                    city=city_data["name"],
+                    country=city_data["country"],
+                )
+            )
 
     return set(cities)
 
