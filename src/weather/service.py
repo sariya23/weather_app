@@ -25,7 +25,7 @@ class CityLocation:
     country: str
 
 
-def coords_of_city(city: str) -> list[CityLocation]:
+def coords_of_city(city: str) -> set[CityLocation]:
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&&appid={API_KEY}&limit=5"
     response = requests.get(url)
     result_data = response.json()
@@ -41,7 +41,7 @@ def coords_of_city(city: str) -> list[CityLocation]:
             )
         )
 
-    return cities
+    return set(cities)
 
 
 def get_weather_by_city(lon: str, lat: str, lang: str = "en", units: str = "metric") -> Weather:
