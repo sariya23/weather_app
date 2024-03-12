@@ -27,6 +27,8 @@ def weather_page(request: Request) -> HTMLResponse:
 @router.post("/select_city", response_class=HTMLResponse)
 def weather_city(request: Request, data: str = Form(...)) -> HTMLResponse:
     cities = coords_of_city(data)
+    if not cities:
+        return template.TemplateResponse("wrong_city.html", {"request": request, "message": "Такого города нет"})
     return template.TemplateResponse("choice_city.html", {"request": request, "cities": cities})
 
 
