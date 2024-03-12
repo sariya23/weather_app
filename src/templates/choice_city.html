@@ -2,7 +2,7 @@
 {% block result %}
 <form action="/weather/weather_by_city/" method="POST">
     {% for city in cities %}
-    <button type="submit" value="{{city.country}}" name="city">{{ city.city }}</button>
+    <button type="submit" value="{{city.lon}} {{city.lat}}" name="city">{{ city.city }}</button>
         <!-- <input class="btn btn-primary mt-4" type="submit"
         value="{{ city.city }} | {{ city.country }}" id="sendCity" name="city" data-value="{{ city.city }}"> -->
     {% endfor %}
