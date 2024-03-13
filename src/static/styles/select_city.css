@@ -4,5 +4,7 @@
 
 .buttons {
     display: flex;
-    gap: 1%;
+    row-gap: 10px;
+    column-gap: 20px;
+    flex-wrap: wrap;
 }
