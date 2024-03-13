@@ -1,7 +1,7 @@
 import requests  # type: ignore
 
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from src.weather.config import API_KEY, BASE_URL
 from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
@@ -19,8 +19,8 @@ class Weather:
 
 @dataclass(frozen=True, slots=True)
 class CityLocation:
-    lat: float
-    lon: float
+    lat: float = field(compare=False)
+    lon: float = field(compare=False)
     city: str
     country: str
 
