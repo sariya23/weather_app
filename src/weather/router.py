@@ -28,9 +28,9 @@ def weather_page(request: Request) -> HTMLResponse:
     return template.TemplateResponse("no_weather.html", {"request": request})
 
 
-@router.post("/select_city", response_class=HTMLResponse)
-def select_city(request: Request, data: str = Form(...)) -> HTMLResponse:
-    cities = get_city_locations_with_same_name(data)
+@router.post("/select_city/", response_class=HTMLResponse)
+def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
+    cities = get_city_locations_with_same_name(city_name)
     if not cities:
         return template.TemplateResponse("error.html", {"request": request, "message": "Такого города нет"})
     return template.TemplateResponse("choice_city.html", {"request": request, "cities": cities})
