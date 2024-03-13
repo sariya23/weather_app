@@ -1,0 +1,8 @@
+.select_block {
+    margin-top: 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 1%;
+}

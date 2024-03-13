@@ -58,7 +58,6 @@ def get_weather_by_city(lon: str, lat: str, lang: str = "en", units: str = "metr
     try:
         response = requests.get(f"{BASE_URL}lon={lon}&lat={lat}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
-        print(result_data)
         result = {
             "city": result_data["name"],
             "country": result_data["sys"]["country"],

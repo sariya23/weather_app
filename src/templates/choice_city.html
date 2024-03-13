@@ -1,8 +1,14 @@
 {% extends "base_weather_page.html" %}
 {% block result %}
-<form action="/weather/weather_by_city/" method="POST">
-    {% for city in cities %}
-    <button type="submit" value="{{city.lon}} {{city.lat}}" name="coords">{{ city.city }} | {{city.country}}</button>
-    {% endfor %}
-</form>
+<div class="select_block">
+    <form action="/weather/weather_by_city/" method="POST">
+        <div class="buttons">
+            {% for city in cities %}
+            <button type="submit" value="{{city.lon}} {{city.lat}}"
+                name="coords" class="btn btn-info">{{ city.city }} |
+                {{city.country}}</button>
+            {% endfor %}
+        </div>
+    </form>
+</div>
 {% endblock %}
