@@ -7,7 +7,8 @@ from tests.unit.common.get_city_locations_with_same_name_test_data import (
 from src.weather.service import get_city_locations_with_same_name, CityLocation
 from src.weather.exceptions import WrongCityName
 
-
+@pytest.mark.unit
+@pytest.mark.fast
 @pytest.mark.parametrize("city_name, expected_locations", POSITIVE_CITY_EXPECTED_LOCATION)
 def test_get_city_locations_with_same_name_positive(city_name: str, expected_locations: set[CityLocation]) -> None:
     """
@@ -18,6 +19,8 @@ def test_get_city_locations_with_same_name_positive(city_name: str, expected_loc
     assert cities == expected_locations
 
 
+@pytest.mark.unit
+@pytest.mark.fast
 @pytest.mark.parametrize("city_name", NEGATIVE_CITY_EXPECTED_LOCATION)
 def test_get_city_locations_with_same_name_negative(city_name: str) -> None:
     """
