@@ -25,7 +25,7 @@ class CityLocation:
     country: str
 
 
-def coords_of_city(city: str) -> set[CityLocation]:
+def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&&appid={API_KEY}&limit=5"
     response = requests.get(url)
     result_data = response.json()

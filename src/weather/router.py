@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 
 from src.weather.utils import add_seconds_shift_to_datetime, get_weater_icon_by_description
-from src.weather.service import get_weather_by_city, coords_of_city
+from src.weather.service import get_weather_by_city, get_city_locations_with_same_name
 from src.weather.exceptions import (
     WrongWeatherDescriprion,
     APIWaetherFailed,
@@ -30,7 +30,7 @@ def weather_page(request: Request) -> HTMLResponse:
 
 @router.post("/select_city", response_class=HTMLResponse)
 def select_city(request: Request, data: str = Form(...)) -> HTMLResponse:
-    cities = coords_of_city(data)
+    cities = get_city_locations_with_same_name(data)
     if not cities:
         return template.TemplateResponse("error.html", {"request": request, "message": "Такого города нет"})
     return template.TemplateResponse("choice_city.html", {"request": request, "cities": cities})
