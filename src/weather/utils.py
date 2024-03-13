@@ -11,7 +11,7 @@ def add_seconds_shift_to_datetime(date_time: datetime, shift: SecondsShift) -> t
     """
     Добавляет к переданному времени сдвиг относительно UTC.
     """
-    shift_in_hours = timedelta(hours=shift / 3600)
+    shift_in_hours = timedelta(seconds=shift)
     datetime_with_shift = date_time + shift_in_hours
     return datetime_with_shift.date(), datetime_with_shift.time()
 
