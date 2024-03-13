@@ -18,9 +18,14 @@ class Weather:
 
 
 @dataclass(frozen=True, slots=True)
+class Coordinates:
+    lat: str
+    lon: str
+
+
+@dataclass(frozen=True, slots=True)
 class CityLocation:
-    lat: float = field(compare=False)
-    lon: float = field(compare=False)
+    coordinates: Coordinates = field(compare=False)
     city: str
     country: str
 
@@ -36,11 +41,11 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     cities: list[CityLocation] = []
 
     for city_data in result_data:
+        coordinate = Coordinates(lat=city_data["lat"], lon=city_data["lon"])
         if city_data.get("local_names") and "ru" in city_data.get("local_names"):
             cities.append(
                 CityLocation(
-                    lat=city_data["lat"],
-                    lon=city_data["lon"],
+                    coordinates=coordinate,
                     city=city_data["local_names"]["ru"],
                     country=city_data["country"],
                 )
@@ -48,8 +53,7 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
         else:
             cities.append(
                 CityLocation(
-                    lat=city_data["lat"],
-                    lon=city_data["lon"],
+                    coordinates=coordinate,
                     city=city_data["name"],
                     country=city_data["country"],
                 )
@@ -58,9 +62,9 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     return set(cities)
 
 
-def get_weather_by_coordinates(lon: str, lat: str, lang: str = "en", units: str = "metric") -> Weather:
+def get_weather_by_coordinates(coordinates: Coordinates, lang: str = "en", units: str = "metric") -> Weather:
     try:
-        response = requests.get(f"{BASE_URL}lon={lon}&lat={lat}&appid={API_KEY}&lang={lang}&units={units}")
+        response = requests.get(f"{BASE_URL}lat={coordinates.lat}&lon={coordinates.lon}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
         result = {
             "city": result_data["name"],

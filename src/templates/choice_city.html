@@ -4,7 +4,7 @@
     <form action="/weather/weather_by_city/" method="POST">
         <div class="buttons">
             {% for city in cities %}
-            <button type="submit" value="{{city.lon}} {{city.lat}}"
+            <button type="submit" value="{{city.coordinates.lat}} {{ city.coordinates.lon }}"
                 name="coords" class="btn btn-info">{{ city.city }} |
                 {{city.country}}</button>
             {% endfor %}
