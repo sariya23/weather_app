@@ -37,7 +37,7 @@ def test_get_weater_icon_by_description_night_positive(weather_description: str,
     Проверяем, что при передаче функции верного описания погоды нам
     возвращается нужное изображение этой погоды. 
 
-    Здесь проверяется при дневном времени.
+    Здесь проверяется при ночном времени.
     """
     weather_icon = get_weater_icon_by_description(weather_description, time_)
     assert weather_icon == WEATHER_ICON_HIGHT[weather_description]
