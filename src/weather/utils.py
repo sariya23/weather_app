@@ -12,8 +12,8 @@ def add_seconds_shift_to_datetime(date_time: datetime, shift: SecondsShift) -> t
     Добавляет к переданному времени сдвиг относительно UTC.
     """
     shift_in_hours = timedelta(hours=shift / 3600)
-    now_datetime_utc = date_time + shift_in_hours
-    return now_datetime_utc.date(), now_datetime_utc.time()
+    datetime_with_shift = date_time + shift_in_hours
+    return datetime_with_shift.date(), datetime_with_shift.time()
 
 
 def get_weater_icon_by_description(descrption: str, time_: time) -> str:
