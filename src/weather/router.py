@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 
 from src.weather.utils import add_seconds_shift_to_datetime, get_weater_icon_by_description
-from src.weather.service import get_weather_by_city, get_city_locations_with_same_name
+from src.weather.service import get_weather_by_coordinates, get_city_locations_with_same_name
 from src.weather.exceptions import (
     WrongWeatherDescriprion,
     APIWaetherFailed,
@@ -40,7 +40,7 @@ def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
 def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
     try:
         lon, lat = coords.split()
-        weather = get_weather_by_city(lon=lon, lat=lat)
+        weather = get_weather_by_coordinates(lon=lon, lat=lat)
         now_datetime_utc = datetime.utcnow()
         date, time = add_seconds_shift_to_datetime(now_datetime_utc, weather.UTC_shift)
         weather_icon_path = get_weater_icon_by_description(weather.description, time)

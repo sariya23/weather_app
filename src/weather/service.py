@@ -54,7 +54,7 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     return set(cities)
 
 
-def get_weather_by_city(lon: str, lat: str, lang: str = "en", units: str = "metric") -> Weather:
+def get_weather_by_coordinates(lon: str, lat: str, lang: str = "en", units: str = "metric") -> Weather:
     try:
         response = requests.get(f"{BASE_URL}lon={lon}&lat={lat}&appid={API_KEY}&lang={lang}&units={units}")
         result_data = response.json()
