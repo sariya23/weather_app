@@ -10,6 +10,7 @@ from src.weather.exceptions import (
     WrongWeatherDescriprion,
     APIWaetherFailed,
     APIWeatherBadResponse,
+    WrongCityName,
 )
 
 logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w",
@@ -30,11 +31,12 @@ def weather_page(request: Request) -> HTMLResponse:
 
 @router.post("/select_city/", response_class=HTMLResponse)
 def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
-    cities = get_city_locations_with_same_name(city_name)
-    if not cities:
+    try:
+        cities = get_city_locations_with_same_name(city_name)
+        return template.TemplateResponse("choice_city.html", {"request": request, "cities": cities})
+    except WrongCityName:
         return template.TemplateResponse("error.html", {"request": request, "message": "Такого города нет"})
-    return template.TemplateResponse("choice_city.html", {"request": request, "cities": cities})
-
+    
 
 @router.post("/weather_by_city/")
 def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:

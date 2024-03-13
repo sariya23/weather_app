@@ -5,5 +5,10 @@ class APIWaetherFailed(Exception):
 class APIWeatherBadResponse(Exception):
     pass
 
+
 class WrongWeatherDescriprion(Exception):
+    pass
+
+
+class WrongCityName(Exception):
     pass

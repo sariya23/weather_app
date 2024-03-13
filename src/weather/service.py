@@ -4,7 +4,7 @@ import math
 from dataclasses import dataclass
 
 from src.weather.config import API_KEY, BASE_URL
-from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse
+from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
 
 
 @dataclass(frozen=True, slots=True)
@@ -29,6 +29,10 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&&appid={API_KEY}&limit=5"
     response = requests.get(url)
     result_data = response.json()
+    
+    if not result_data:
+        raise WrongCityName
+
     cities: list[CityLocation] = []
 
     for city_data in result_data:
