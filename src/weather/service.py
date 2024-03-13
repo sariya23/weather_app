@@ -36,7 +36,7 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     cities: list[CityLocation] = []
 
     for city_data in result_data:
-        if "ru" in city_data["local_names"]:
+        if city_data.get("local_names") and "ru" in city_data.get("local_names"):
             cities.append(
                 CityLocation(
                     lat=city_data["lat"],
