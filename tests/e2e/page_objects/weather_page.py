@@ -1,6 +1,5 @@
 from pageo.base_page import BasePage
-from pageo.locators import IdLocator
-
+from pageo.locators import IdLocator, ClassNameLocator
 
 from tests.e2e.common.URLs import URLs
 
@@ -13,6 +12,8 @@ class WeatherPage(BasePage):
     base_url = URLs.BASE_URL
     url_suffix = URLs.WEATHER_SUFFIX
 
+    gopher_wait_image = ClassNameLocator("gopher_image__image")
     city_field = IdLocator("cityInput")
     send_city_button = IdLocator("sendCity")
+
     
