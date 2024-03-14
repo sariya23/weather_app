@@ -2,8 +2,14 @@
 {% block content %}
 <main class="content">
     <div class="about">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas a ipsam necessitatibus, magni debitis blanditiis impedit, ullam quisquam ut tempora illo totam exercitationem vel, pariatur voluptas nam! Quis, quod deserunt!</p>
-        <img src="{{ url_for('static', path='images/about_image.png') }}" alt="">
+        <div class="top-block">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas a ipsam necessitatibus, magni debitis blanditiis impedit, ullam quisquam ut tempora illo totam exercitationem vel, pariatur voluptas nam! Quis, quod deserunt!</p>
+            <img src="{{ url_for('static', path='images/about_image.png') }}" alt="" class="home_img">
+        </div>
+        <div class="bottom-block">
+            <img src="{{ url_for('static', path='images/about_image.png') }}" alt="" class="home_img">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas a ipsam necessitatibus, magni debitis blanditiis impedit, ullam quisquam ut tempora illo totam exercitationem vel, pariatur voluptas nam! Quis, quod deserunt!</p>
+        </div>
     </div>
     <div class="usability">
         <img src="" alt="">

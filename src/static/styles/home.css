@@ -4,6 +4,44 @@
     flex-direction: column;
 }
 
+.top-block {
+    display: flex;
+    flex-direction: row;
+    background: rgb(40,172,190);
+    background: linear-gradient(0deg, rgba(40,172,190,1) 0%, rgba(71,162,171,1) 61%, rgba(130,198,212,1) 92%);
+    margin: 20px;
+    padding: 15px;
+    border-radius: 40px;
+}
+
+.bottom-block {
+    display: flex;
+    flex-direction: row;
+    background: rgb(40,172,190);
+    background: linear-gradient(0deg, rgba(40,172,190,1) 0%, rgba(71,162,171,1) 61%, rgba(130,198,212,1) 92%);
+    margin: 20px;
+    padding: 15px;
+    border-radius: 40px;
+}
+
 .about {
     width: 100%;
+}
+
+.home_img {
+    width: 20vw;
+    display: block;
+}
+
+
+@media (max-width: 700px) {
+    .top-block  {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .bottom-block {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
 }
