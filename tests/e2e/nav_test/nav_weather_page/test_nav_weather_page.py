@@ -16,5 +16,10 @@ def test_no_burger(driver: WebDriver, window_size: tuple[int, int]) -> None:
     home_page = HomePage(driver, is_open=False)
     assert weather_page.burger_menu.is_displayed() is False
 
-    weather_page.to_home_page_link.click()
-    assert driver.current_url == home_page.base_url
+    weather_page.to_home_page_link.click()  
+    assert driver.current_url == home_page.url
+
+    home_page.open()
+    assert weather_page.burger_menu.is_displayed() is False
+    home_page.to_weather_page_link.click()
+    assert driver.current_url == weather_page.url
