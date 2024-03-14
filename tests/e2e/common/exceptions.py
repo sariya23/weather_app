@@ -1,0 +1,2 @@
+class NoMatchesButtons(Exception):
+    pass
