@@ -1,5 +1,5 @@
 const sendCity = document.getElementById("sendCity");
-const cityInput = document.getElementById("floatingInput");
+const cityInput = document.getElementById("cityInput");
 
 cityInput.oninput = function () {
     if (cityInput.value.length === 0) {
