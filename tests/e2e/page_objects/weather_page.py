@@ -23,4 +23,5 @@ class WeatherPage(BasePage):
     temperature = IdLocator('temperature')
     wind_image = IdLocator('wind_image')
     wind_speed = IdLocator('wind_speed')
+    UTC_shift = IdLocator('UTC_shift')
  
