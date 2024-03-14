@@ -4,11 +4,11 @@
     <h1 class="text-center">Погода</h1>
     <form method="post" name="city" id="cityForm" action="/weather/select_city/">
         <div class="form-floating">
-            <input type="text" class="form-control" id="floatingInput"
+            <input type="text" class="form-control" id="cityInput"
                 placeholder="Moscow" , name="city_name">
             <label for="floatingInput">Введите название города</label>
             <input class="btn btn-primary mt-4" type="submit"
-                value="Узнать погоду" id="sendCity" disabled>
+                value="Посмотреть список доступных городов" id="sendCity" disabled>
         </div>
     </form>
     {% block result %}
