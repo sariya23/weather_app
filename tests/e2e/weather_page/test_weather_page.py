@@ -10,6 +10,7 @@ from tests.e2e.common.image_by_link import ImageByLink
 from tests.e2e.weather_page.utils import is_two_image_equal
 from tests.e2e.weather_page.common.enable_input_test_data import INPUT_CITY_DATA
 from tests.e2e.weather_page.common.wrong_city_names_test_data import WRONG_CITY_NAMES
+from tests.e2e.weather_page.common.text_values import TextValues
 
 
 @pytest.mark.parametrize("window_size", ALL_WINDOW_SIZES)
@@ -26,6 +27,7 @@ def test_base_image_present(driver: WebDriver, window_size: tuple[int, int]) -> 
     image_src = image_element.get_attribute("src")
     image_from_page = ImageByLink(image_src)
     assert is_two_image_equal(image_from_page.content, Path("../../src/static/images/gopher_info/gopher_play.png"))
+    assert weather_page.no_city_city.text == TextValues.TEXT_WITH_NO_CITY_ENTER
 
 
 @pytest.mark.parametrize("window_size", ALL_WINDOW_SIZES)
@@ -73,3 +75,4 @@ def test_image_when_wrong_city_name(driver: WebDriver, window_size: tuple[int, i
     image_src = image_element.get_attribute("src")
     image_from_page = ImageByLink(image_src)
     assert is_two_image_equal(image_from_page.content, Path("../../src/static/images/gopher_info/gopher_fix.png"))
+    assert weather_page.no_city_city.text == TextValues.TEXT_WRONG_CITY

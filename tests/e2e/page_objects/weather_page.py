@@ -15,5 +15,5 @@ class WeatherPage(BasePage):
     gopher_image = ClassNameLocator("gopher_image__image")
     city_field = IdLocator("cityInput")
     send_city_button = IdLocator("sendCity")
-    text_wrong_city = ClassNameLocator("no_weather__text")
+    no_city_city = ClassNameLocator("no_weather__text")
     
