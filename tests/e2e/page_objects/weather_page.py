@@ -23,5 +23,7 @@ class WeatherPage(BasePage):
     temperature = IdLocator('temperature')
     wind_image = IdLocator('wind_image')
     wind_speed = IdLocator('wind_speed')
-    UTC_shift = IdLocator('UTC_shift')
- 
+    UTC_shift = IdLocator('UTC_shift')  
+    burger_menu = XPATHLocator('/html/body/nav/div/button')
+    to_weather_page_link = IdLocator("weather_link")
+    to_home_page_link = IdLocator("home_link")
