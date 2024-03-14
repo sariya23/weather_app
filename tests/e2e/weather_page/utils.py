@@ -5,6 +5,9 @@ from selenium.webdriver.remote.webelement import WebElement
 
 import io
 from pathlib import Path
+from typing import Iterable
+
+from tests.e2e.common.exceptions import NoMatchesButtons
 
 
 def is_two_image_equal(image1: bytes | ImageType | Path, image2: bytes | ImageType | Path) -> bool:
@@ -24,7 +27,7 @@ def is_two_image_equal(image1: bytes | ImageType | Path, image2: bytes | ImageTy
     return imagehash.average_hash(image1) == imagehash.average_hash(image2)
 
 
-def get_button_by_text(buttons: list[WebElement], button_text: str) -> WebElement | None:
+def get_button_by_text(buttons: Iterable[WebElement], button_text: str) -> WebElement:
     """
     Из списка кнопок возврщает ту, текст которой совпадает
     с переданным.
@@ -32,5 +35,5 @@ def get_button_by_text(buttons: list[WebElement], button_text: str) -> WebElemen
     for button in buttons:
         if button.text == button_text:
             return button
-    return None
+    raise NoMatchesButtons
 
