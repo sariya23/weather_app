@@ -69,6 +69,7 @@ def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
                 "date": formatted_date,
                 "time": formatted_time,
                 "icon": weather_icon_path,
+                "UTC_shift": f"{(weather.UTC_shift / 3600):+g}"
             },
         )
     except Exception as e:

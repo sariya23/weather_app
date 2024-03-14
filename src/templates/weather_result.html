@@ -15,7 +15,11 @@
                 Погода в <span class="location_value" id="city">{{ weather.city|title }}, {{weather.country}}</span>
             </p>
             <p class="location-time__time location_label">
-               По местному времени: <span class="location_value" id="datetime">{{ date }} {{ time }}</span>
+               По местному времени: 
+               <span class="location_value" id="datetime">
+                    {{ date }}, {{ time }},
+                    <span id="UTC_shift">UTC{{ UTC_shift }}</span>
+                </span>
             </p>
         </div>
     </div>
