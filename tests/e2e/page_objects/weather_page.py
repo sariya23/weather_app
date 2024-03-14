@@ -12,8 +12,8 @@ class WeatherPage(BasePage):
     base_url = URLs.BASE_URL
     url_suffix = URLs.WEATHER_SUFFIX
 
-    gopher_wait_image = ClassNameLocator("gopher_image__image")
+    gopher_image = ClassNameLocator("gopher_image__image")
     city_field = IdLocator("cityInput")
     send_city_button = IdLocator("sendCity")
-
+    text_wrong_city = ClassNameLocator("no_weather__text")
     
