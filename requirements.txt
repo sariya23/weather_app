@@ -13,3 +13,4 @@ ruff
 mypy
 dontenv
 requests
+pageo
