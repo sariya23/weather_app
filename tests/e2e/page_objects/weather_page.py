@@ -17,4 +17,10 @@ class WeatherPage(BasePage):
     send_city_button = IdLocator("sendCity")
     no_city_city = ClassNameLocator("no_weather__text")
     buttons_with_city_names = XPATHLocator('//*/div[@class="buttons"]/button', is_many=True)
-    
+    city_name_span = IdLocator('city')
+    datetime_span = IdLocator('datetime')
+    weather_icon = IdLocator('weather_icon')
+    temperature = IdLocator('temperature')
+    wind_image = IdLocator('wind_image')
+    wind_speed = IdLocator('wind_speed')
+ 
