@@ -1,5 +1,5 @@
 from pageo.base_page import BasePage
-from pageo.locators import IdLocator, ClassNameLocator
+from pageo.locators import IdLocator, ClassNameLocator, XPATHLocator
 
 from tests.e2e.common.URLs import URLs
 
@@ -16,4 +16,5 @@ class WeatherPage(BasePage):
     city_field = IdLocator("cityInput")
     send_city_button = IdLocator("sendCity")
     no_city_city = ClassNameLocator("no_weather__text")
+    buttons_with_city_names = XPATHLocator('//*/div[@class="buttons"]/button', is_many=True)
     
