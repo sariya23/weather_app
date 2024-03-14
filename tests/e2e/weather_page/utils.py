@@ -24,7 +24,7 @@ def is_two_image_equal(image1: bytes | ImageType | Path, image2: bytes | ImageTy
     return imagehash.average_hash(image1) == imagehash.average_hash(image2)
 
 
-def select_button_by_text(buttons: list[WebElement], button_text: str) -> WebElement | None:
+def get_button_by_text(buttons: list[WebElement], button_text: str) -> WebElement | None:
     """
     Из списка кнопок возврщает ту, текст которой совпадает
     с переданным.
