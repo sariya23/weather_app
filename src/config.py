@@ -5,7 +5,8 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     weather_api: str
-    base_url: str
+    url_get_by_city_name: str
+    url_get_by_coordinates: str
 
 
 
