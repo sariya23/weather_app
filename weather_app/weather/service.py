@@ -31,7 +31,7 @@ class CityLocation:
 
 
 def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
-    url = f"{settings.url_get_by_city_name}q={city}&appid={settings.weather_api}&limit=5"
+    url = settings.url_get_by_city_name
     params = {
         "q": city,
         "appid": settings.weather_api,
