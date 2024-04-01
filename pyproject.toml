@@ -15,3 +15,6 @@ pydantic-settings = "^2.2.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+ignore = ['E501', 'E712']
