@@ -1,7 +1,6 @@
 from datetime import timedelta, datetime, date, time
 from typing import TypeAlias
 
-from weather_app.weather.exceptions import WrongWeatherDescriprion
 from weather_app.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 
 SecondsShift: TypeAlias = int
@@ -27,7 +26,7 @@ def get_weater_icon_by_description(descrption: str, time_: time) -> str:
             return WEATHER_ICON_HIGHT[descrption]
         return WEATHER_ICON_DAY[descrption]
     except KeyError:
-        raise WrongWeatherDescriprion(f"Такой погоды нет - {descrption}")
+        return "no_image.png"
     
 
 def is_hight(time_: time) -> bool:

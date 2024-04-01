@@ -14,7 +14,9 @@ from weather_app.weather.service import (
     Coordinates,
 )
 from weather_app.weather.exceptions import (
-    WrongCityName,
+    CityNotFound,
+    BadConnection,
+    APIResponseError,
 )
 
 logging.basicConfig(
@@ -44,10 +46,17 @@ def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
         return template.TemplateResponse(
             "choice_city.html", {"request": request, "cities": cities}
         )
-    except WrongCityName:
+    except CityNotFound as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {city_name}")
         return template.TemplateResponse(
             "error.html", {"request": request, "message": "Такого города нет"}
         )
+    except Exception as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {city_name}")
+        return template.TemplateResponse(
+            "error.html", {"request": request, "message": "Все сломалось"}
+        )
+
 
 
 @router.post("/weather_by_city/")
@@ -71,8 +80,15 @@ def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
                 "UTC_shift": f"{(weather.UTC_shift / 3600):+g}"
             },
         )
-    except Exception as e:
-        logging.error(f"EXP {str(e)}, with parames: {coords}")
+    except BadConnection as e:
+        logging.error(f"Exception {str(e)}\n, request: {request}\n, coords: {coords}")
         return template.TemplateResponse(
-            "error.html", {"request": request, "message": "Упс, ошибка в API"}
+            "error.html", {"request": request, "message": "Проблемы с соединением"}
+        )
+    except APIResponseError as e:
+        logging.error(f"Exception {str(e)}\n, request: {request}\n, coords: {coords}")
+    except Exception as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {coords}")
+        return template.TemplateResponse(
+            "error.html", {"request": request, "message": "Все сломалось"}
         )

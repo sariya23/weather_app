@@ -1,15 +1,15 @@
 class APIError(Exception):
     pass
 
-class WrongCityName(APIError):
+class CityNotFound(APIError):
     pass
 
 
-class APIWaetherFailed(APIError):
+class BadConnection(APIError):
     pass
 
 
-class APIWeatherBadResponse(APIError):
+class APIResponseError(APIError):
     pass
 
 

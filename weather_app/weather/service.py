@@ -4,7 +4,7 @@ import math
 from dataclasses import dataclass, field
 
 from weather_app.config import settings
-from weather_app.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
+from weather_app.weather.exceptions import BadConnection, APIResponseError, CityNotFound
 
 
 @dataclass(frozen=True, slots=True)
@@ -41,7 +41,7 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     result_data = response.json()
     
     if not result_data:
-        raise WrongCityName
+        raise CityNotFound
 
     cities: list[CityLocation] = []
 
@@ -90,9 +90,8 @@ def get_weather_by_coordinates(coordinates: Coordinates, lang: str = "en", units
         return Weather(**result)
 
     except requests.exceptions.RequestException:
-        raise APIWaetherFailed
-
+        raise BadConnection
     except KeyError:
-        raise APIWeatherBadResponse
+        raise APIResponseError
     except Exception as e:
         raise e
