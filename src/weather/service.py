@@ -32,7 +32,12 @@ class CityLocation:
 
 def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
     url = f"{settings.url_get_by_city_name}q={city}&appid={settings.weather_api}&limit=5"
-    response = requests.get(url)
+    params = {
+        "q": city,
+        "appid": settings.weather_api,
+        "limit": 5,
+    }
+    response = requests.get(url, params=params)
     result_data = response.json()
     
     if not result_data:
@@ -63,8 +68,16 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
 
 
 def get_weather_by_coordinates(coordinates: Coordinates, lang: str = "en", units: str = "metric") -> Weather:
+    url = settings.url_get_by_coordinates
+    params = {
+        "lat": coordinates.lat,
+        "lon": coordinates.lon,
+        "appid": settings.weather_api,
+        "lang": lang,
+        "units": "metric",
+    }
     try:
-        response = requests.get(f"{settings.url_get_by_coordinates}lat={coordinates.lat}&lon={coordinates.lon}&appid={settings.weather_api}&lang={lang}&units={units}")
+        response = requests.get(url, params=params)
         result_data = response.json()
         result = {
             "city": result_data["name"],
