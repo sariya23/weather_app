@@ -1,14 +1,17 @@
-class APIWaetherFailed(Exception):
+class APIError(Exception):
+    pass
+
+class WrongCityName(APIError):
     pass
 
 
-class APIWeatherBadResponse(Exception):
+class APIWaetherFailed(APIError):
     pass
 
 
-class WrongWeatherDescriprion(Exception):
+class APIWeatherBadResponse(APIError):
     pass
 
 
-class WrongCityName(Exception):
+class WrongWeatherDescriprion(APIError):
     pass

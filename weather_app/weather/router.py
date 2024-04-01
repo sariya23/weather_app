@@ -51,7 +51,7 @@ def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
 
 
 @router.post("/weather_by_city/")
-def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
+def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse: 
     try:
         coordinates = Coordinates(*coords.split())
         weather = get_weather_by_coordinates(coordinates)
