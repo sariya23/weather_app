@@ -3,8 +3,8 @@ import requests  # type: ignore
 import math
 from dataclasses import dataclass, field
 
-from src.config import settings
-from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
+from weather_app.config import settings
+from weather_app.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
 
 
 @dataclass(frozen=True, slots=True)

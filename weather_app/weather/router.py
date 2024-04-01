@@ -4,16 +4,16 @@ from fastapi.responses import HTMLResponse
 import logging
 from datetime import datetime
 
-from src.weather.utils import (
+from weather_app.weather.utils import (
     add_seconds_shift_to_datetime,
     get_weater_icon_by_description,
 )
-from src.weather.service import (
+from weather_app.weather.service import (
     get_weather_by_coordinates,
     get_city_locations_with_same_name,
     Coordinates,
 )
-from src.weather.exceptions import (
+from weather_app.weather.exceptions import (
     WrongCityName,
 )
 

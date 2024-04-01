@@ -1,8 +1,8 @@
 from datetime import timedelta, datetime, date, time
 from typing import TypeAlias
 
-from src.weather.exceptions import WrongWeatherDescriprion
-from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
+from weather_app.weather.exceptions import WrongWeatherDescriprion
+from weather_app.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
 
 SecondsShift: TypeAlias = int
 

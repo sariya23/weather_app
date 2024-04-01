@@ -1,2 +1,2 @@
 runserver:
-	cd src && uvicorn main:app --reload
+	cd weather_app && uvicorn main:app --reload
