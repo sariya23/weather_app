@@ -4,17 +4,19 @@ from fastapi.responses import HTMLResponse
 import logging
 from datetime import datetime
 
-from src.weather.utils import (
+from weather_app.weather.utils import (
     add_seconds_shift_to_datetime,
     get_weater_icon_by_description,
 )
-from src.weather.service import (
+from weather_app.weather.service import (
     get_weather_by_coordinates,
     get_city_locations_with_same_name,
     Coordinates,
 )
-from src.weather.exceptions import (
-    WrongCityName,
+from weather_app.weather.exceptions import (
+    CityNotFound,
+    BadConnection,
+    APIResponseError,
 )
 
 logging.basicConfig(
@@ -44,15 +46,21 @@ def select_city(request: Request, city_name: str = Form(...)) -> HTMLResponse:
         return template.TemplateResponse(
             "choice_city.html", {"request": request, "cities": cities}
         )
-    except WrongCityName:
+    except CityNotFound as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {city_name}")
         return template.TemplateResponse(
             "error.html", {"request": request, "message": "Такого города нет"}
         )
+    except Exception as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {city_name}")
+        return template.TemplateResponse(
+            "error.html", {"request": request, "message": "Все сломалось"}
+        )
+
 
 
 @router.post("/weather_by_city/")
-def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
-    print(coords)
+def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse: 
     try:
         coordinates = Coordinates(*coords.split())
         weather = get_weather_by_coordinates(coordinates)
@@ -72,8 +80,15 @@ def get_weather(request: Request, coords: str = Form(...)) -> HTMLResponse:
                 "UTC_shift": f"{(weather.UTC_shift / 3600):+g}"
             },
         )
-    except Exception as e:
-        logging.error(f"EXP {str(e)}, with parames: {coords}")
+    except BadConnection as e:
+        logging.error(f"Exception {str(e)}\n, request: {request}\n, coords: {coords}")
         return template.TemplateResponse(
-            "error.html", {"request": request, "message": "Упс, ошибка в API"}
+            "error.html", {"request": request, "message": "Проблемы с соединением"}
+        )
+    except APIResponseError as e:
+        logging.error(f"Exception {str(e)}\n, request: {request}\n, coords: {coords}")
+    except Exception as e:
+        logging.error(f"EXP {str(e)}\n, request: {request}\n, coords: {coords}")
+        return template.TemplateResponse(
+            "error.html", {"request": request, "message": "Все сломалось"}
         )

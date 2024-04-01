@@ -4,8 +4,8 @@ from tests.unit.common.get_city_locations_with_same_name_test_data import (
     POSITIVE_CITY_EXPECTED_LOCATION,
     NEGATIVE_CITY_EXPECTED_LOCATION,
 )
-from src.weather.service import get_city_locations_with_same_name, CityLocation
-from src.weather.exceptions import WrongCityName
+from weather_app.weather.service import get_city_locations_with_same_name, CityLocation
+from weather_app.weather.exceptions import WrongCityName
 
 @pytest.mark.unit
 @pytest.mark.fast

@@ -6,7 +6,7 @@ from tests.unit.common.is_hight_test_date import (
     NIGHT_TIME,
     DAY_TIME,
 )
-from src.weather.utils import is_hight
+from weather_app.weather.utils import is_hight
 
 
 @pytest.mark.fast

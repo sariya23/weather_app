@@ -1,6 +1,6 @@
 import pytest
 
-from src.weather.service import get_weather_by_coordinates, Coordinates, Weather
+from weather_app.weather.service import get_weather_by_coordinates, Coordinates, Weather
 from tests.unit.common.get_weather_test_data import COORDINATES_EXPECTED_CITY_POSITIVE
 
 

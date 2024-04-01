@@ -3,8 +3,8 @@ import requests  # type: ignore
 import math
 from dataclasses import dataclass, field
 
-from src.weather.config import API_KEY, BASE_URL
-from src.weather.exceptions import APIWaetherFailed, APIWeatherBadResponse, WrongCityName
+from weather_app.config import settings
+from weather_app.weather.exceptions import BadConnection, APIResponseError, CityNotFound
 
 
 @dataclass(frozen=True, slots=True)
@@ -31,12 +31,17 @@ class CityLocation:
 
 
 def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
-    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={API_KEY}&limit=5"
-    response = requests.get(url)
+    url = settings.url_get_by_city_name
+    params = {
+        "q": city,
+        "appid": settings.weather_api,
+        "limit": 5,
+    }
+    response = requests.get(url, params=params)
     result_data = response.json()
     
     if not result_data:
-        raise WrongCityName
+        raise CityNotFound
 
     cities: list[CityLocation] = []
 
@@ -63,8 +68,16 @@ def get_city_locations_with_same_name(city: str) -> set[CityLocation]:
 
 
 def get_weather_by_coordinates(coordinates: Coordinates, lang: str = "en", units: str = "metric") -> Weather:
+    url = settings.url_get_by_coordinates
+    params = {
+        "lat": coordinates.lat,
+        "lon": coordinates.lon,
+        "appid": settings.weather_api,
+        "lang": lang,
+        "units": "metric",
+    }
     try:
-        response = requests.get(f"{BASE_URL}lat={coordinates.lat}&lon={coordinates.lon}&appid={API_KEY}&lang={lang}&units={units}")
+        response = requests.get(url, params=params)
         result_data = response.json()
         result = {
             "city": result_data["name"],
@@ -77,9 +90,8 @@ def get_weather_by_coordinates(coordinates: Coordinates, lang: str = "en", units
         return Weather(**result)
 
     except requests.exceptions.RequestException:
-        raise APIWaetherFailed
-
+        raise BadConnection
     except KeyError:
-        raise APIWeatherBadResponse
+        raise APIResponseError
     except Exception as e:
         raise e
