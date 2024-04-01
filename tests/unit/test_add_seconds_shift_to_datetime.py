@@ -2,7 +2,7 @@ import pytest
 
 from datetime import datetime, date, time
 
-from src.weather.utils import add_seconds_shift_to_datetime
+from weather_app.weather.utils import add_seconds_shift_to_datetime
 from tests.unit.common.add_seconds_shift_to_datetime_test_data import POSTITVE_DATETIME_SHIFT
 
 

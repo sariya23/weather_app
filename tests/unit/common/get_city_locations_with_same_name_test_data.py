@@ -1,4 +1,4 @@
-from src.weather.service import CityLocation, Coordinates
+from weather_app.weather.service import CityLocation, Coordinates
 
 
 POSITIVE_CITY_EXPECTED_LOCATION = (

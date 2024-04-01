@@ -2,15 +2,15 @@ import pytest
 
 from datetime import time
 
-from src.weather.utils import get_weater_icon_by_description
+from weather_app.weather.utils import get_weater_icon_by_description
 from tests.unit.common.get_weather_icon_test_data import (
     NIGHT_TIME,
     DAY_TIME,
     WEATHER_DESCRIPTION,
     WROND_WEATHER_DESCRIPTION,
 )
-from src.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
-from src.weather.exceptions import WrongWeatherDescriprion
+from weather_app.weather.constants import WEATHER_ICON_DAY, WEATHER_ICON_HIGHT
+from weather_app.weather.exceptions import WrongWeatherDescriprion
 
 
 @pytest.mark.fast

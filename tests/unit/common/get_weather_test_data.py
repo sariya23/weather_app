@@ -1,4 +1,4 @@
-from src.weather.service import Coordinates, Weather
+from weather_app.weather.service import Coordinates, Weather
 
 
 COORDINATES_EXPECTED_CITY_POSITIVE = (
